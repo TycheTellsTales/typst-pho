@@ -4,9 +4,9 @@
 
 #import "./private.typ"
 
-///////////////////
-// Main Function //
-///////////////////
+////////////////////
+// Main Functions //
+////////////////////
 
 #let pho(
   viewer: "Tin Mother",
@@ -35,6 +35,7 @@
   #text(green)[[#body]]
 ]
 
+/*
 #pho(
   viewer: "Tin Mother",
   poster: "Tin Mother",
@@ -61,3 +62,4 @@
       ]
     })
 })
+*/
