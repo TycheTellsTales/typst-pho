@@ -38,10 +38,14 @@
     lambda(topic, post)
 
     context {
+      // Check if there are insufficient posts for the end of page post. If so
+      // post it.
       if calc.rem(count.get(), 10) != 0 {
         let start = calc.floor((startPage + count.get() / 10))
         private.pageEnd(start, endPage)
       }
+
+      // Wrap it up with a square.
       private.end()
     }
   }
@@ -81,3 +85,5 @@
       Reply 2
     ]
 })
+
+#text(red)[#private.pageEnd(15, 30)]

@@ -79,12 +79,53 @@
   \
 ]
 
+#let __formatPageNumber(x, current) = {
+  if x == current {
+    return str(x)
+  }
+
+  return underline(str(x))
+}
+
 #let pageEnd(
   current,
   end,
 ) = {
-  // [/indent] [b]End of Page.   1, [u]2[/u], [u]3[/u] ... [u]13[/u], [u]14[/u], [u]15[/u][/b] [indent]
-  [#strong[End of Page.  #current]]
+  let pages = ()
+  if end <= 10 {
+    pages += range(1, end+1).map(x => __formatPageNumber(x, current) + ", ")
+  } else {
+    let tmp = ()
+    // The beginning of the range:
+    tmp += range(1, 4)
+
+    // Surrounding the current:
+    tmp += range(
+      calc.max(current - 2, 4),
+      calc.min(current+3, end+1)
+    )
+
+    // The end of the range:
+    // TODO: Fix this
+    tmp += range(
+      calc.max(current, end - 3),
+      calc.max(current + 3, end + 1)
+    )
+
+    let previous = 0
+    for x in tmp {
+      if x - previous > 1 {
+        pages.push(" .. ")
+      } else if previous != 0 {
+        pages.push(", ")
+      }
+
+      previous = x
+      pages.push(__formatPageNumber(x, current))
+    }
+  }
+
+  [#strong[End of Page.  #pages.join("")]]
 }
 
 #let post(
