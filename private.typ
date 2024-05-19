@@ -45,7 +45,7 @@
 }
 
 #let topic(
-  topic: "",
+  title: "",
   poster: "",
   tags: (),
   board: none,
@@ -61,10 +61,11 @@
   #if type(board) == "string" {
     board = boards.at(board)
   }
+  #let person = people.at(poster, default: (name: poster, tags: tags))
 
-  #strong[#suit.diamond Topic: #topic] \
+  #strong[#suit.diamond Topic: #title] \
   #strong[In: #board.join(" " + triangle.filled.r + " ")] \
-  #strong[#poster] #formatTags(tags) \
+  #strong[#person.name] #formatTags(person.tags) \
   Posted On #date: \
   #body
 ]
@@ -85,15 +86,16 @@
   tags: (),
   body
 ) = [
-  #if poster == op {
-    tags.insert(0, "Original Poster")
+  #let person = people.at(poster, default: (name: poster, tags: tags))
+  #if person.name == op {
+    person.tags.insert(0, "Original Poster")
   }
 
   #set par(
     first-line-indent: 0em,
   )
 
-  #strong[#triangle.filled.r#poster] #formatTags(tags) \
+  #strong[#triangle.filled.r#person.name] #formatTags(person.tags) \
   Replied On #date: \
   #body \
   \

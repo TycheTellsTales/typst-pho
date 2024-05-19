@@ -35,9 +35,14 @@
   #text(green)[[#body]]
 ]
 
-#pho(viewer: "Tin Mother", poster: "Tin Mother", (topic, page) => {
+#pho(
+  viewer: "Tin Mother",
+  poster: "Tin Mother",
+  date: "January 1st 1001",
+  (topic, page) => {
     topic(
-      board: "announcements",
+      title: "Hello World!",
+      board: "Announcements",
     )[
       Hello World!\
       \
