@@ -16,31 +16,52 @@
   endPage: 1,
   lambda,
 ) = {
-  if poster == "" {
-    poster = viewer
+  context {
+    if poster == "" {
+      poster = viewer
+    }
+
+    let topic = private.topic.with(poster: poster, date: date)
+    let key = "pho_post_" + str(query(selector(heading).before(here())).len())
+    let key = "pho_post_0"
+    let count = state(key, 0)
+
+    let post = private.paginator(
+      op: poster,
+      date: date,
+      startPage: startPage,
+      endPage: endPage,
+      count,
+    )
+
+    private.header()
+    lambda(topic, post)
+
+    context {
+      if calc.rem(count.get(), 10) != 0 {
+        let start = calc.floor((startPage + count.get() / 10))
+        private.pageEnd(start, endPage)
+      }
+      private.end()
+    }
   }
-
-  let topic = private.topic.with(poster: poster, date: date)
-  let page = private.page.with(
-    startPage: startPage, endPage: endPage,
-    op: poster, date: date,
-  )
-
-  private.header()
-  lambda(topic, page)
-  private.end()
 }
 
 #let link(body) = [
   #text(green)[[#body]]
 ]
 
-/*
+// #let registerPerson() = {
+// }
+// 
+// #let registerBoard() = {
+// }
+
 #pho(
   viewer: "Tin Mother",
   poster: "Tin Mother",
   date: "January 1st 1001",
-  (topic, page) => {
+  (topic, post) => {
     topic(
       title: "Hello World!",
       board: "Announcements",
@@ -52,14 +73,11 @@
       #link[This is a link.jpg]
     ]
 
-    page(post => {
-      post(poster: "Tin Mother")[
-        Reply 1
-      ]
+    post(poster: "Tin Mother")[
+      Reply 1
+    ]
 
-      post(poster: "Foo")[
-        Reply 2
-      ]
-    })
+    post(poster: "Foo")[
+      Reply 2
+    ]
 })
-*/

@@ -1,7 +1,7 @@
 //////////////
 // PHO Data //
 //////////////
-//
+
 #let people = (
   "Bagrat": (name: "Bagrat", tags: ([Veteran Member], [The Guy in the Know])),
   "AverageAlexandros": (name: "AverageAlexandros", tags: ([Cape Husband],)),

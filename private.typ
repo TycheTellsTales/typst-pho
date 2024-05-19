@@ -79,6 +79,14 @@
   \
 ]
 
+#let pageEnd(
+  current,
+  end,
+) = {
+  // [/indent] [b]End of Page.   1, [u]2[/u], [u]3[/u] ... [u]13[/u], [u]14[/u], [u]15[/u][/b] [indent]
+  [#strong[End of Page.  #current]]
+}
+
 #let post(
   poster: "",
   op: "",
@@ -101,12 +109,32 @@
   \
 ]
 
-#let page(startPage: 1, endPage: 1, op: "", date: "", codeblock) = {
-  pageStart(startPage, endPage)
+#let paginator(startPage: 1, endPage: 1, op: "", date: "", count) = {
+  return (
+    poster: "",
+    tags: (),
+    date: date,
+    body,
+  ) => {
+    context {
+      if calc.rem(count.get(), 10) == 0 {
+        let start = startPage + count.get() / 10
+        pageStart(start, endPage)
+      }
+    }
 
-  codeblock(post.with(op: op, date: date))
+    post(op: op, date: date, poster: poster, tags: tags, body)
+    context {
+      [#count.update(x => x+1)]
+    }
 
-  pageStart(startPage, endPage)
+    context {
+     if calc.rem(count.get(), 10) == 0 {
+       let start = (startPage + count.get() / 10) - 1
+       pageEnd(start, endPage)
+     }
+   }
+  }
 }
 
 
