@@ -9,7 +9,7 @@
 ///////////////////
 
 #let pho(
-  user: "Tin Mother",
+  viewer: "Tin Mother",
   poster: "",
   date: "April 10th 2011",
   startPage: 1,
@@ -17,41 +17,42 @@
   lambda,
 ) = {
   if poster == "" {
-    poster = user
+    poster = viewer
   }
 
-  private.header()
-
-  let topic = private.topic;
-
-  let ctx = (
-    topic: private.topic.with(poster: poster, date: date),
-    post: private.post.with(op: poster, date: date),
-    link: private.link,
+  let topic = private.topic.with(poster: poster, date: date)
+  let page = private.page.with(
+    startPage: startPage, endPage: endPage,
+    op: poster, date: date,
   )
 
-  private.page(startPage, endPage)
-
-  lambda(ctx)
-
-  private.page(startPage, endPage)
+  private.header()
+  lambda(topic, page)
   private.end()
 }
 
-/*
-#pho(user: "Tin Mother", x => {
-    (x.topic)(
+#let link(body) = [
+  #text(green)[[#body]]
+]
+
+#pho(viewer: "Tin Mother", poster: "Tin Mother", (topic, page) => {
+    topic(
       board: "announcements",
     )[
-      Hello World!
+      Hello World!\
+      \
+      This is a post\
+      \
+      #link[This is a link.jpg]
     ]
 
-    (x.post)(poster: "Tin Mother")[
-      Reply 1
-    ]
+    page(post => {
+      post(poster: "Tin Mother")[
+        Reply 1
+      ]
 
-    (x.post)(poster: "Foo")[
-      Reply 2
-    ]
+      post(poster: "Foo")[
+        Reply 2
+      ]
+    })
 })
-*/

@@ -2,6 +2,22 @@
 #import sym: triangle
 #import "./data.typ": people, boards
 
+///////////////
+// Variables //
+///////////////
+
+#let __date = ""
+#let __op = ""
+
+#let __resetVariables(
+  date: "January 1st 1970",
+  op: "",
+
+) = {
+  __date = date
+  __op = op
+}
+
 ////////////////////
 // PHO Formatting //
 ////////////////////
@@ -53,7 +69,7 @@
   #body
 ]
 
-#let page(
+#let pageStart(
   current,
   end,
 ) = [
@@ -83,10 +99,16 @@
   \
 ]
 
+#let page(startPage: 1, endPage: 1, op: "", date: "", codeblock) = {
+  pageStart(startPage, endPage)
+
+  codeblock(post.with(op: op, date: date))
+
+  pageStart(startPage, endPage)
+}
+
+
 #let end() = [
   #align(center)[■]
 ]
 
-#let link(body) = [
-  #text(green)[[#body]]
-]

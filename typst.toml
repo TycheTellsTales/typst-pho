@@ -5,4 +5,4 @@ entrypoint = "lib.typ"
 authors = ["TycheTellsTales"]
 repository = "https://github.com/tychetellstales/typst-pho"
 license = "MIT"
-description = "A library for writing Worm's Parahuman Online Format."
+description = "A library for automating Worm's Parahuman Online Format."
