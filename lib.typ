@@ -47,7 +47,7 @@
       }
 
       // Wrap it up with a square.
-      private.end()
+      private.centerSquare()
     }
   }
 }

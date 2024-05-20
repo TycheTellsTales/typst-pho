@@ -23,9 +23,11 @@
 // PHO Formatting //
 ////////////////////
 
+#let centerSquare() = {align(center)[■]}
+
 #let header(username: "Tin Mother") = [
   \
-  #align(center)[■]
+  #centerSquare()
   \
   #strong[Welcome to the Parahumans Online message boards.] \
   You are currently logged in, #emph[#username] \
@@ -37,7 +39,7 @@
   - Ten posts per page
   - Last ten messages in private message history.
   - Threads and private messages are ordered chronologically. 
-  #align(center)[■]
+  #centerSquare()
   \
 ]
 
@@ -170,8 +172,4 @@
    }
   }
 }
-
-#let end() = [
-  #align(center)[■]
-]
 
