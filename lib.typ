@@ -28,10 +28,10 @@
     let count = state(key, 0)
 
     let post = private.paginator(
-      op: poster,
-      date: date,
-      startPage: startPage,
-      endPage: endPage,
+      op:    poster,
+      date:  date,
+      start: startPage,
+      end:   endPage,
       count,
     )
 
@@ -41,8 +41,8 @@
     context {
       // Check if there are insufficient posts for the end of page post. If so
       // post it.
-      if calc.rem(count.get(), 10) != 0 {
-        let current = calc.floor((startPage + count.get() / 10))
+      if not private.__tenthPost(count) {
+        let current = private.__newStart(startPage, count)
         private.pageEnd(current, calc.max(current, endPage))
       }
 

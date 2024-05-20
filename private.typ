@@ -39,17 +39,20 @@
   date: "January 1st 1970",
   body,
 ) = [
-  #set par(
-    first-line-indent: 0em,
-  )
-  #let person = people.get().at(poster, default: (name: poster, tags: tags))
-  #let boardName = context boards.resolve(board).join(" " + triangle.filled.r + " ")
+  #context [
+    #set par(
+      first-line-indent: 0em,
+    )
 
-  #strong[#suit.diamond Topic: #title] \
-  #strong[In: #boardName] \
-  #strong[#person.name] #formatTags(person.tags) \
-  Posted On #date: \
-  #body
+    #let person = people.get().at(poster, default: (name: poster, tags: tags))
+    #let boardName = context boards.resolve(board).join(" " + triangle.filled.r + " ")
+
+    #strong[#suit.diamond Topic: #title] \
+    #strong[In: #boardName] \
+    #strong[#person.name] #formatTags(person.tags) \
+    Posted On #date: \
+    #body
+  ]
 ]
 
 #let pageStart(
@@ -129,7 +132,15 @@
   \
 ]
 
-#let paginator(startPage: 1, endPage: 1, op: "", date: "", count) = {
+#let __tenthPost(count) = {
+  return calc.rem(count.get(), 10) == 0
+}
+
+#let __newStart(start, count) = {
+  calc.floor(start + count.get() / 10)
+}
+
+#let paginator(start: 1, end: 1, op: "", date: "", count) = {
   return (
     poster,
     tags: (),
@@ -137,9 +148,8 @@
     body,
   ) => {
     context {
-      if calc.rem(count.get(), 10) == 0 {
-        let start = calc.floor(startPage + count.get() / 10)
-        pageStart(start, endPage)
+     if __tenthPost(count) {
+        pageStart(__newStart(start, count), end)
       }
     }
 
@@ -149,9 +159,8 @@
     }
 
     context {
-     if calc.rem(count.get(), 10) == 0 {
-       let start = calc.floor((startPage + count.get() / 10) - 1)
-       pageEnd(start, endPage)
+     if __tenthPost(count) {
+       pageEnd(__newStart(start, count) - 1, end)
      }
    }
   }
