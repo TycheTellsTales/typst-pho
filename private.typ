@@ -1,6 +1,7 @@
 #import emoji: suit
 #import sym: triangle
-#import "./data.typ": people, boards
+#import "./boards.typ"
+#import "./people.typ"
 
 ///////////////
 // Variables //
@@ -55,16 +56,11 @@
   #set par(
     first-line-indent: 0em,
   )
-  #if board == none {
-    board = boards.brockton
-  }
-  #if type(board) == "string" {
-    board = boards.get().at(board)
-  }
   #let person = people.get().at(poster, default: (name: poster, tags: tags))
+  #let boardName = context boards.resolve(board).join(" " + triangle.filled.r + " ")
 
   #strong[#suit.diamond Topic: #title] \
-  #strong[In: #board.join(" " + triangle.filled.r + " ")] \
+  #strong[In: #boardName] \
   #strong[#person.name] #formatTags(person.tags) \
   Posted On #date: \
   #body

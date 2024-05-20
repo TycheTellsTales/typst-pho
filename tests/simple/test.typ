@@ -16,11 +16,11 @@
       #link[This is a link.jpg]
     ]
 
-    post(poster: "Tin Mother")[
+    post("Tin Mother")[
       Reply 1
     ]
 
-    post(poster: "Foo")[
+    post("Foo")[
       Reply 2
     ]
 })

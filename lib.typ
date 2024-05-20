@@ -3,7 +3,8 @@
 /////////////
 
 #import "./private.typ"
-#import "./data.typ"
+#import "./people.typ"
+#import "./boards.typ"
 
 ////////////////////
 // Main Functions //
@@ -54,22 +55,3 @@
 #let link(body) = [
   #text(green)[[#body]]
 ]
-
-#let registerPerson(person) = {
-  assert.ne(person.name, none)
-  assert.eq(type(person.tags), "array")
-
-  context data.people.update(x => {
-    x.insert(person.name, person)
-    return x
-  })
-}
-
-#let registerBoard(name, board) = {
-  assert.eq(type(board), "array")
-
-  context data.boards.update(x => {
-    x.insert(name, board)
-    return x
-  })
-}

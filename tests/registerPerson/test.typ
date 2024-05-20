@@ -1,12 +1,11 @@
-#import "../../lib.typ": registerPerson
-#import "../../data.typ": people
+#import "../../lib.typ": people
 
 = Pre-Registration
 
-#context people.get()
+#people.get()
 
-#registerPerson((name: "FooBar", tags: ([Tag1], [Tag2],)))
+#people.register((name: "FooBar", tags: ([Tag1], [Tag2],)))
 
 = Post-Registration
 
-#context people.get()
+#people.get()

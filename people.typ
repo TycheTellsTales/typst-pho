@@ -1,8 +1,8 @@
-//////////////
-// PHO Data //
-//////////////
+////////////////
+// PHO People //
+////////////////
 
-#let people = state("pho_people", (
+#let __people = state("pho_people", (
   "Bagrat": (name: "Bagrat", tags: ([Veteran Member], [The Guy in the Know])),
   "AverageAlexandros": (name: "AverageAlexandros", tags: ([Cape Husband],)),
   "Brilliger": (name: "Brilliger", tags: ([Moderator: Protectorate Main],)),
@@ -17,7 +17,16 @@
   "Vista": (name: "Vista", tags: ([Verified Cape], [Wards ENE])),
 ))
 
-#let boards = state("pho_boards", (
-  "Announcements": ("Boards", "Announcements"),
-  "Brockton Bay": ("Boards", "Places", "America", [Brockton Bay Discussion (Public Board)]),
-))
+#let register(person) = {
+  assert.ne(person.name, none)
+  assert.eq(type(person.tags), "array")
+
+  context __people.update(x => {
+    x.insert(person.name, person)
+    return x
+  })
+}
+
+#let get() = {
+  context __people.get()
+}

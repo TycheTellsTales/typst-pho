@@ -15,63 +15,63 @@
       This is a post\
     ]
 
-    post(poster: "Tin Mother")[
+    post("Tin Mother")[
       Reply 1
     ]
 
-    post(poster: "Foo")[
+    post("Foo")[
       Reply 2
     ]
 
-    post(poster: "Bar")[
+    post("Bar")[
       Reply 3
     ]
 
-    post(poster: "Qaz")[
+    post("Qaz")[
       Reply 4
     ]
 
-    post(poster: "Baz")[
+    post("Baz")[
       Reply 5
     ]
 
-    post(poster: "Tin Mother")[
+    post("Tin Mother")[
       Reply 6
     ]
 
-    post(poster: "Foo")[
+    post("Foo")[
       Reply 7
     ]
 
-    post(poster: "Bar")[
+    post("Bar")[
       Reply 8
     ]
 
-    post(poster: "Qaz")[
+    post("Qaz")[
       Reply 9
     ]
 
-    post(poster: "Baz")[
+    post("Baz")[
       Reply 10
     ]
 
-    post(poster: "Tin Mother")[
+    post("Tin Mother")[
       Reply 11
     ]
 
-    post(poster: "Foo")[
+    post("Foo")[
       Reply 12
     ]
 
-    post(poster: "Bar")[
+    post("Bar")[
       Reply 13
     ]
 
-    post(poster: "Qaz")[
+    post("Qaz")[
       Reply 14
     ]
 
-    post(poster: "Baz")[
+    post("Baz")[
       Reply 15
     ]
 })
