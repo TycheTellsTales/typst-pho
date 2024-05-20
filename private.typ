@@ -3,22 +3,6 @@
 #import "./boards.typ"
 #import "./people.typ"
 
-///////////////
-// Variables //
-///////////////
-
-#let __date = ""
-#let __op = ""
-
-#let __resetVariables(
-  date: "January 1st 1970",
-  op: "",
-
-) = {
-  __date = date
-  __op = op
-}
-
 ////////////////////
 // PHO Formatting //
 ////////////////////
