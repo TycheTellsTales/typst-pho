@@ -59,9 +59,9 @@
     board = boards.brockton
   }
   #if type(board) == "string" {
-    board = boards.at(board)
+    board = boards.get().at(board)
   }
-  #let person = people.at(poster, default: (name: poster, tags: tags))
+  #let person = people.get().at(poster, default: (name: poster, tags: tags))
 
   #strong[#suit.diamond Topic: #title] \
   #strong[In: #board.join(" " + triangle.filled.r + " ")] \
@@ -132,7 +132,7 @@
   tags: (),
   body
 ) = [
-  #let person = people.at(poster, default: (name: poster, tags: tags))
+  #let person = people.get().at(poster, default: (name: poster, tags: tags))
   #if person.name == op {
     person.tags.insert(0, "Original Poster")
   }

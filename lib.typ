@@ -3,6 +3,7 @@
 /////////////
 
 #import "./private.typ"
+#import "./data.typ"
 
 ////////////////////
 // Main Functions //
@@ -13,7 +14,7 @@
   poster: "",
   date: "April 10th 2011",
   startPage: 1,
-  endPage: 2,
+  endPage: 1,
   lambda,
 ) = {
   context {
@@ -54,8 +55,15 @@
   #text(green)[[#body]]
 ]
 
-// #let registerPerson() = {
-// }
-// 
+#let registerPerson(person) = {
+  assert.ne(person.name, none)
+  assert.eq(type(person.tags), "array")
+
+  context data.people.update(x => {
+    x.insert(person.name, person)
+    return x
+  })
+}
+
 // #let registerBoard() = {
 // }

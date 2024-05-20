@@ -4,6 +4,7 @@
   viewer: "Tin Mother",
   poster: "Tin Mother",
   date: "January 1st 1001",
+  endPage: 2,
   (topic, post) => {
     topic(
       title: "Hello World!",
