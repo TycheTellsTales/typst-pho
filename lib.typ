@@ -65,5 +65,11 @@
   })
 }
 
-// #let registerBoard() = {
-// }
+#let registerBoard(name, board) = {
+  assert.eq(type(board), "array")
+
+  context data.boards.update(x => {
+    x.insert(name, board)
+    return x
+  })
+}
