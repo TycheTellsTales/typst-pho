@@ -149,7 +149,7 @@
 
 #let paginator(startPage: 1, endPage: 1, op: "", date: "", count) = {
   return (
-    poster: "",
+    poster,
     tags: (),
     date: date,
     body,
