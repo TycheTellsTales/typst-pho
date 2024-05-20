@@ -3,6 +3,9 @@ VERSION:=$(shell grep version typst.toml | cut -d= -f2 | sed 's/[ "]//g')
 test:
 	typst-test run
 
+test_update:
+	typst-test update
+
 lib:
 	typst compile lib.typ --open
 

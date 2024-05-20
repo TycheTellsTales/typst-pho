@@ -91,38 +91,35 @@
   current,
   end,
 ) = {
+  let tmp = ()
+  // The beginning of the range:
+  tmp += range(1, calc.min(4, end+1))
+
+  // Surrounding the current:
+  tmp += range(
+    calc.max(current - 2, 4),
+    calc.min(current+3, end+1)
+  )
+
+  // The end of the range:
+  tmp += range(
+    calc.max(current, end - 2),
+    end+1,
+  )
+
+  tmp = tmp.dedup()
+
   let pages = ()
-  if end <= 10 {
-    pages += range(1, end+1).map(x => __formatPageNumber(x, current) + ", ")
-  } else {
-    let tmp = ()
-    // The beginning of the range:
-    tmp += range(1, 4)
-
-    // Surrounding the current:
-    tmp += range(
-      calc.max(current - 2, 4),
-      calc.min(current+3, end+1)
-    )
-
-    // The end of the range:
-    // TODO: Fix this
-    tmp += range(
-      calc.max(current, end - 3),
-      calc.max(current + 3, end + 1)
-    )
-
-    let previous = 0
-    for x in tmp {
-      if x - previous > 1 {
-        pages.push(" .. ")
-      } else if previous != 0 {
-        pages.push(", ")
-      }
-
-      previous = x
-      pages.push(__formatPageNumber(x, current))
+  let previous = 0
+  for x in tmp {
+    if x - previous > 1 {
+      pages.push(" ... ")
+    } else if previous != 0 {
+      pages.push(", ")
     }
+
+    previous = x
+    pages.push(__formatPageNumber(x, current))
   }
 
   [#strong[End of Page.  #pages.join("")]]
@@ -159,7 +156,7 @@
   ) => {
     context {
       if calc.rem(count.get(), 10) == 0 {
-        let start = startPage + count.get() / 10
+        let start = calc.floor(startPage + count.get() / 10)
         pageStart(start, endPage)
       }
     }
@@ -171,13 +168,12 @@
 
     context {
      if calc.rem(count.get(), 10) == 0 {
-       let start = (startPage + count.get() / 10) - 1
+       let start = calc.floor((startPage + count.get() / 10) - 1)
        pageEnd(start, endPage)
      }
    }
   }
 }
-
 
 #let end() = [
   #align(center)[■]
