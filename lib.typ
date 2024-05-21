@@ -50,8 +50,7 @@
       // Check if there are insufficient posts for the end of page message to be
       // generated. If so post it.
       if not __private.__tenthPost(count) {
-        let current = __private.__newStart(startPage, count)
-        __private.pageEnd(current, calc.max(current, endPage))
+        __private.pageEnd(startPage, endPage, count)
       }
 
       // Wrap it up with a square.

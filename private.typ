@@ -61,10 +61,28 @@
   ]
 ]
 
+#let __tenthPost(count) = {
+  return calc.rem(count.get(), 10) == 0
+}
+
+#let __newStart(start, count) = {
+  calc.floor(start + count.get() / 10)
+}
+
+#let __newEnd(start, end, count) = {
+  let posts = count.final()
+  let extra = calc.floor(posts / 10)
+  return calc.max(end, start+extra)
+}
+
+
 #let pageStart(
-  current,
+  start,
   end,
+  count
 ) = [
+  #let current = __newStart(start, count)
+  #let end = __newEnd(start, end, count)
   \
   #strong[(Showing page #current of #end)] \
   \
@@ -79,9 +97,13 @@
 }
 
 #let pageEnd(
-  current,
+  start,
   end,
+  count,
 ) = {
+  let current = __newStart(start, count)
+  let end = __newEnd(start, end, count)
+
   let tmp = ()
   // The beginning of the range:
   tmp += range(1, calc.min(4, end+1))
@@ -138,14 +160,6 @@
   \
 ]
 
-#let __tenthPost(count) = {
-  return calc.rem(count.get(), 10) == 0
-}
-
-#let __newStart(start, count) = {
-  calc.floor(start + count.get() / 10)
-}
-
 #let paginator(start: 1, end: 1, op: "", date: "", count) = {
   return (
     poster,
@@ -155,7 +169,7 @@
   ) => {
     context {
      if __tenthPost(count) {
-        pageStart(__newStart(start, count), end)
+        pageStart(start, end, count)
       }
     }
 
@@ -166,7 +180,7 @@
 
     context {
      if __tenthPost(count) {
-       pageEnd(__newStart(start, count) - 1, end)
+       pageEnd(start, end, count)
      }
    }
   }
