@@ -4,7 +4,7 @@
 
 #import "@preview/oxifmt:0.2.1": strfmt
 
-#import "./private.typ"
+#import "./private.typ" as __private
 #import "./people.typ"
 #import "./boards.typ"
 
@@ -25,7 +25,7 @@
       poster = viewer
     }
 
-    let topic = private.topic.with(poster: poster, date: date)
+    let topic = __private.topic.with(poster: poster, date: date)
     let pos = here().position()
     let key = strfmt("pho_post_{0}_{1}_{2}x{3}",
       poster,
@@ -35,7 +35,7 @@
     )
     let count = state(key, 0)
 
-    let post = private.paginator(
+    let post = __private.paginator(
       op:    poster,
       date:  date,
       start: startPage,
@@ -43,19 +43,19 @@
       count,
     )
 
-    private.header()
+    __private.header()
     lambda(topic, post)
 
     context {
-      // Check if there are insufficient posts for the end of page post. If so
-      // post it.
-      if not private.__tenthPost(count) {
-        let current = private.__newStart(startPage, count)
-        private.pageEnd(current, calc.max(current, endPage))
+      // Check if there are insufficient posts for the end of page message to be
+      // generated. If so post it.
+      if not __private.__tenthPost(count) {
+        let current = __private.__newStart(startPage, count)
+        __private.pageEnd(current, calc.max(current, endPage))
       }
 
       // Wrap it up with a square.
-      private.centerSquare()
+      __private.centerSquare()
     }
   }
 }
