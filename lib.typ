@@ -25,7 +25,6 @@
       poster = viewer
     }
 
-    let topic = __private.topic.with(poster: poster, date: date)
     let pos = here().position()
     let key = strfmt("pho_post_{0}_{1}_{2}x{3}",
       poster,
@@ -35,6 +34,7 @@
     )
     let count = state(key, 0)
 
+    let topic = __private.topic.with(poster: poster, date: date)
     let post = __private.paginator(
       op:    poster,
       date:  date,
@@ -60,5 +60,5 @@
 }
 
 #let link(body) = [
-  #text(green)[[#body]]
+  #text(green)[#body]
 ]

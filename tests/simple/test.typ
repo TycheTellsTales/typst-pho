@@ -13,7 +13,7 @@
       \
       This is a post\
       \
-      #link[This is a link.jpg]
+      #link[[This is a link.jpg]]
     ]
 
     post("Tin Mother")[
