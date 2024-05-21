@@ -3,6 +3,12 @@
 #import "./boards.typ"
 #import "./people.typ"
 
+///////////////
+// Variables //
+///////////////
+
+#let originalPoster = "Original Poster"
+
 ////////////////////
 // PHO Formatting //
 ////////////////////
@@ -119,7 +125,7 @@
 ) = [
   #let person = people.get().at(poster, default: (name: poster, tags: tags))
   #if person.name == op {
-    person.tags.insert(0, "Original Poster")
+    person.tags.insert(0, originalPoster)
   }
 
   #set par(

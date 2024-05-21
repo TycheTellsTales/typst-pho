@@ -2,6 +2,8 @@
 // Imports //
 /////////////
 
+#import "@preview/oxifmt:0.2.1": strfmt
+
 #import "./private.typ"
 #import "./people.typ"
 #import "./boards.typ"
@@ -24,7 +26,13 @@
     }
 
     let topic = private.topic.with(poster: poster, date: date)
-    let key = "pho_post_" + str(query(selector(heading).before(here())).len())
+    let pos = here().position()
+    let key = strfmt("pho_post_{0}_{1}_{2}x{3}",
+      poster,
+      pos.page,
+      calc.floor(pos.x.pt()),
+      calc.floor(pos.y.pt()),
+    )
     let count = state(key, 0)
 
     let post = private.paginator(
