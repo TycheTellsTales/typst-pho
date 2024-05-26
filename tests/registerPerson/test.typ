@@ -2,10 +2,10 @@
 
 = Pre-Registration
 
-#people.get()
+#context people.get("FooBar")
 
 #people.register((name: "FooBar", tags: ([Tag1], [Tag2],)))
 
 = Post-Registration
 
-#people.get()
+#context people.get("FooBar")

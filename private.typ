@@ -50,7 +50,9 @@
       first-line-indent: 0em,
     )
 
-    #let person = people.get().at(poster, default: (name: poster, tags: tags))
+    #let person = people.get(poster,
+      default: (name: poster, tags: tags),
+    )
     #let boardName = context boards.resolve(board).join(" " + triangle.filled.r + " ")
 
     #strong[#suit.diamond Topic: #title] \
@@ -145,11 +147,10 @@
   tags: (),
   body
 ) = [
-  #let person = people.get().at(poster, default: (name: poster, tags: tags))
+  #let person = people.get(poster, default: (name: poster, tags: tags))
   #if person.name == op {
     person.tags.insert(0, originalPoster)
   }
-
   #set par(
     first-line-indent: 0em,
   )
