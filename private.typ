@@ -57,7 +57,7 @@
 
     #strong[#suit.diamond Topic: #title] \
     #strong[In: #boardName] \
-    #strong[#person.name] #formatTags(person.tags) \
+    #strong[#person.name] #formatTags((person.tags + tags).dedup()) \
     Posted On #date: \
     #body
   ]
@@ -146,20 +146,21 @@
   date: "January 1st 1970",
   tags: (),
   body
-) = [
-  #let person = people.get(poster, default: (name: poster, tags: tags))
-  #if person.name == op {
+) = {
+  let person = people.get(poster, default: (name: poster, tags: tags))
+  if person.name == op {
     person.tags.insert(0, originalPoster)
   }
-  #set par(
+  set par(
     first-line-indent: 0em,
   )
 
-  #strong[#triangle.filled.r#person.name] #formatTags(person.tags) \
-  Replied On #date: \
-  #body \
-  \
-]
+  block(inset: 1em)[
+    #strong[#triangle.filled.r#person.name] #formatTags((person.tags + tags).dedup()) \
+    Replied On #date: \
+    #body
+  ]
+}
 
 #let paginator(start: 1, end: 1, op: "", date: "", count) = {
   return (
