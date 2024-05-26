@@ -43,7 +43,7 @@
       count,
     )
 
-    __private.header()
+    __private.header(username: viewer)
     lambda(topic, post)
 
     context {

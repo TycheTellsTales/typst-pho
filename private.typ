@@ -16,9 +16,7 @@
 #let centerSquare() = {align(center)[■]}
 
 #let header(username: "Tin Mother") = [
-  \
   #centerSquare()
-  \
   #strong[Welcome to the Parahumans Online message boards.] \
   You are currently logged in, #emph[#username] \
   You are viewing: \
@@ -30,7 +28,6 @@
   - Last ten messages in private message history.
   - Threads and private messages are ordered chronologically. 
   #centerSquare()
-  \
 ]
 
 #let formatTags(tags) = {
