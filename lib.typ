@@ -62,3 +62,5 @@
 #let link(body) = [
   #text(green)[#body]
 ]
+
+#let name(name) = [#text(blue)[*\@#name*]]
