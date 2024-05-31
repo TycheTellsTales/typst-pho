@@ -5,8 +5,8 @@
 #let __default = "Brockton Bay"
 
 #let __boards = state("pho_boards", (
-  "Announcements": ("Boards", "Announcements"),
-  "Brockton Bay": ("Boards", "Places", "America", [Brockton Bay Discussion (Public Board)]),
+  "Announcements": ("Announcements",),
+  "Brockton Bay": ("Places", "America", [Brockton Bay Discussion (Public Board)]),
 ))
 
 #let register(name, board) = {

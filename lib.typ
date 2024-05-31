@@ -21,6 +21,7 @@
   lambda,
 ) = {
   context {
+    let poster = poster; // Redeclare poster so it is "in-scope"
     if poster == "" {
       poster = viewer
     }

@@ -50,7 +50,7 @@
     #let person = people.get(poster,
       default: (name: poster, tags: tags),
     )
-    #let boardName = context boards.resolve(board).join(" " + triangle.filled.r + " ")
+    #let boardName = context (("Boards",) + boards.resolve(board)).join(" " + triangle.filled.r + " ")
 
     #strong[#suit.diamond Topic: #title] \
     #strong[In: #boardName] \
